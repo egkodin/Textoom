@@ -1,5 +1,8 @@
 import tkinter 
 from tkinter import * 
+from tkinter import Tk, BOTH
+from tkinter.ttk import Frame, Button
+from tkinter import messagebox as mbox
 from tkinter.filedialog import askopenfile, asksaveasfile
 from tkinter.messagebox import showerror
 from tkinter import messagebox
@@ -15,12 +18,10 @@ HEIGHT = 650
 class Text_editor:
     def __init__(self):
         self.file_name = tkinter.NONE
-    
 
     def new_file(self):
         self.file_name = 'Без названия'
         text.delete('1.0', tkinter.END)
-    
     
     def open_file(self):
         inp = askopenfile(mode = 'r')
@@ -48,10 +49,10 @@ class Text_editor:
     
     
     def get_info(self):
-        messagebox.showinfo('Справка', 'Информация о нашем преложение! Спасибо, что его используете!')
-        
-    def abc_exit(self):
-        app.quit()
+        messagebox.showinfo('Справка', 'Информация о нашем приложении! Спасибо, что его используете!')
+    
+    def onQuest(self):
+        app.askquestion('Вы уверены, что хотите выйти?')
     
     def ch_pro1(self):
         app.wm_attributes('-alpha', 1)
@@ -93,12 +94,14 @@ text.pack()
 menubar =  tkinter.Menu(app)
 editor = Text_editor()
 
-app_menu = tkinter.Menu(menubar) 
+app_quit = tkinter.Menu(menubar)
+app_quit.add_command(label = 'Выйти', command = quit)
+
+app_menu = tkinter.Menu(menubar)
 app_menu.add_command(label= 'Новый файл', command = editor.new_file)
 app_menu.add_command(label= 'Открыть', command = editor.open_file)
 app_menu.add_command(label= 'Сохранить', command = editor.save_file)
 app_menu.add_command(label= 'Сохранить как', command = editor.save_as_file)
-app_menu.add_command(label= 'Выход', command = editor.abc_exit)
 
 app_spravka = tkinter.Menu(menubar) 
 app_spravka.add_command(label = 'О программе', command = editor.about_pr)
@@ -114,6 +117,7 @@ app_changecolor.add_command(label = 'Темная тема', command = editor.da
 app_changecolor.add_command(label = 'Светлая тема', command = editor.white_1) 
 app_changecolor.add_command(label = 'Свой вариант', command = editor.ch_clr) 
 
+menubar.add_cascade(label = 'Выйти', menu = app_quit) #блок "Выйти"
 menubar.add_cascade(label = 'Файл', menu = app_menu) #блок "Файл"
 menubar.add_cascade(label = 'Изменить цветовую тему', menu = app_changecolor)
 menubar.add_cascade(label = 'Изменить прозрачность редактора', menu = app_bk)
