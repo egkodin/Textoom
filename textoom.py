@@ -1,4 +1,4 @@
-import tkinter 
+import tkinter
 from tkinter import * 
 from tkinter import Tk, BOTH
 from tkinter.ttk import Frame, Button
@@ -8,17 +8,18 @@ from tkinter.messagebox import showerror
 from tkinter import messagebox
 from tkinter import colorchooser
 from tkinter.messagebox import showinfo
-
+from functools import partial
+from tkinter.colorchooser import askcolor
 
 APP_NAME = 'Textoom' 
 
-WIDTH = 900
-HEIGHT = 650
+WIDTH = 1200
+HEIGHT = 800
 
 class Text_editor:
     def __init__(self):
         self.file_name = tkinter.NONE
-
+    
     def new_file(self):
         self.file_name = 'Без названия'
         text.delete('1.0', tkinter.END)
@@ -49,10 +50,8 @@ class Text_editor:
     
     
     def get_info(self):
-        messagebox.showinfo('Справка', 'Информация о нашем приложении! Спасибо, что его используете!')
-    
-    def onQuest(self):
-        app.askquestion('Вы уверены, что хотите выйти?')
+        messagebox.showinfo('Справка', 'Информация о нашем приложении. Спасибо, что его используете!')
+
     
     def ch_pro1(self):
         app.wm_attributes('-alpha', 1)
@@ -64,10 +63,8 @@ class Text_editor:
         app.wm_attributes('-alpha', 0.5)
     
     def dark_1(self):
-        app.configure(bg = '#1c242e')
         text.config(bg = '#1c242e')
     def white_1(self):
-        app.config(bg = 'white')
         text.config(bg = 'white')
 
     def ch_clr(self):
@@ -77,7 +74,7 @@ class Text_editor:
   
 
     def about_pr(self):
-        hello = showinfo('Textoom', 'Текстовый редактор\n\nВерсия: 1.00.1\nДанная программа написана исключительно на Python3\nАвтор: Овечкин Егор')
+        hello = showinfo('Textoom', 'Текстовый редактор\n\nВерсия: 1.2\nДанная программа написана исключительно на Python3\nАвтор: Овечкин Егор')
 
 
 app = tkinter.Tk()
@@ -85,8 +82,7 @@ app.title(APP_NAME)
 app.minsize(width = WIDTH, height = HEIGHT)
 app.maxsize(width = WIDTH, height = HEIGHT)
 
-#працюю з наповненням
-text = tkinter.Text(app, width = WIDTH - 50, height = HEIGHT, wrap = 'word') 
+text = tkinter.Text(app, width = WIDTH, height = HEIGHT, font='Microsoft 30', wrap = 'word')
 scroll = Scrollbar(app, orient = VERTICAL, command = text.yview)
 scroll.pack(side = 'right', fill = 'y')
 text.configure(yscrollcommand = scroll.set)
@@ -114,7 +110,7 @@ app_bk.add_command(label = '0.5', command = editor.ch_pro4)
 
 app_changecolor = tkinter.Menu(menubar)
 app_changecolor.add_command(label = 'Темная тема', command = editor.dark_1) 
-app_changecolor.add_command(label = 'Светлая тема', command = editor.white_1) 
+app_changecolor.add_command(label = 'Светлая тема', command = editor.white_1)
 app_changecolor.add_command(label = 'Свой вариант', command = editor.ch_clr) 
 
 menubar.add_cascade(label = 'Выйти', menu = app_quit) #блок "Выйти"
